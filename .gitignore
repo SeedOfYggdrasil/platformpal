@@ -6,3 +6,6 @@ logs
 logs/*
 venv
 venv/*
+
+
+.DS_Store
