@@ -1,8 +1,1 @@
-{
-"scripts": {
-   "start":"cd backend && npm run start",
-   "dev":"cd frontend && npm run dev",
-   "deploy":"cd frontend && npm run build && cd ../backend && npm run start",
-   "refresh":"cd frontend && rm package-lock.json && rm -r node_modules && rm -r dist && npm i && npm run build && cd ../backend && rm package-lock.json && rm -r node_modules && npm i"
-  }
-}
+{"scripts":{"start":"cd backend && npm run start","dev":"cd frontend && npm run dev","deploy":"cd frontend && npm run build && cd ../backend && npm run start","refresh":"cd frontend && rm package-lock.json && rm -r node_modules && rm -r dist && npm i && npm run build && cd ../backend && rm package-lock.json && rm -r node_modules && npm i"},"dependencies":{"repomix":"^0.2.5"}}
