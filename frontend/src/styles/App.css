@@ -1,14 +1,27 @@
-body {
-  min-width: 320px;
-  max-width: 1270px; 
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+html, body {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  min-width: 320px;
+  max-width: 1270px; 
   background-color: #000;
 }
 
-.container {
+.cs-container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -21,8 +34,9 @@ body {
   color: #fff;
 }
 
-.content {
+.cs-content {
    position: relative;
+   display: flex;
    margin-top: 15vh;
 }
 
@@ -64,7 +78,7 @@ body {
 
 .footer .footlink {
   display: flex;
-  flexwrap: nowrap;
+  flex-wrap: nowrap;
   width: 100%;
   text-decoration: none;
   font-size: 12px;

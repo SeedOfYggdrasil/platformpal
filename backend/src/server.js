@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('combined', { stream: { write: (msg) => logger.info(msg.trim()) } }));
 
 app.use('/api', router);
-app.use('/build', express.static(path.resolve(../../frontend/dist')));
+// app.use('/build', express.static(path.resolve(../../frontend/dist')));
 app.get('/check', (req, res) => res.send('Server is operational.'));
 app.get('/status', (req, res) => res.status(200).json({ status: 'UP' }));
 
