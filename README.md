@@ -1,4 +1,4 @@
-# MetaMockup
+# PlatformPal
 
 ## **Concept Overview**
 An AI-driven app designed to streamline the process of creating and listing digital products on platforms like Etsy, Amazon KDP, Redbubble, Shopify, and eBay. The app solves two major challenges:
