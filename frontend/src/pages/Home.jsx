@@ -2,32 +2,36 @@
 
 import { } from 'react';
 import logo from '../assets/logo.svg';
-import { Box, Heading, Text, Button } from 'rebass';
-import '@s/App.css';
+import { Box, Heading } from 'rebass';
+import FileUpload from '@c/FileUpload.jsx';
+import '@s/Home.css';
 
 function Home() {
 
   return (
-    <>
     <div className="cs-container">
-    <Box p={4} bg="black" boxShadow="0 0 8px rgba(255, 0, 255, 0.3)">
-<div className="cs-content">
-      <img src={logo} className="logo" />
-      <Heading fontSize={5} mb={3} color="white">
-         MetaMockup
-      </Heading>
-</div>
+    	<Box p={4} bg="black" boxShadow="0 0 8px rgba(255, 0, 255, 0.3)">
+ 			<div className="cs-content">
 
-      <div className="card">
-        <Button variant="Secondary" bg="rgba(0,150,200,0.8)" color="white">
-          Upload
-        </Button>
-      </div>
+				<div className="logo">
+      				<img src={logo} className="logo" />
+				</div> 
 
-      </Box>
+	 			<div className="title">
+      				<Heading fontSize={5} mb={3} color="white">
+         				PlatformPal
+     	 			</Heading>
+    			</div>
 
-    </div>
-    </>
+    			<div className="card">
+     				<FileUpload
+     					apiEndpoint="/api/upload" 
+     				/>
+    			</div>
+
+			</div>
+		</Box>
+	</div>
   )
 }
 

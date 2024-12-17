@@ -1,10 +1,10 @@
-// ../backend/src/controllers/aiController.js
+// ../bckend/src/controllers/imgController.js
 
 import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
 
-export const aiCall = async (req, res) => {
+export const processImages = async (req, res) => {
     if (!req.files || req.files.length === 0) {
         return res.status(400).json({ error: 'No files provided for processing' });
     }
@@ -28,13 +28,13 @@ export const aiCall = async (req, res) => {
             }, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'User-Agent': 'YourAppName/1.0'
+                    'User-Agent': 'PlatformPal/1.0'
                 }
             });
 
             responses.push({
                 file: file.filename,
-                result: aiResponse.data
+                result: imgResponse.data
             });
         }
 
@@ -57,3 +57,5 @@ export const aiCall = async (req, res) => {
         });
     }
 };
+
+export default processImages;
