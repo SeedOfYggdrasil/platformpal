@@ -1,0 +1,9 @@
+.progress-display {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.progress-text {
+  font-size: 1rem;
+  color: #333;
+}
