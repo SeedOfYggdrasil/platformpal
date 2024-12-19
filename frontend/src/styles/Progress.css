@@ -1,0 +1,12 @@
+/* ../frontend/src/styles/Progress.css */
+
+.progress {
+  text-align: center;
+  margin: 2rem;
+  padding: 2rem;
+}
+
+.progress p {
+  font-size: 3em;
+  color: #ffffff;
+}

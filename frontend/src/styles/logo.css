@@ -1,0 +1,27 @@
+/* ../frontend/src/styles/logo.css */
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 6em;
+    width: 6em;
+    padding: 1.2em;
+    will-change: filter;
+    transition: filter 300ms;
+    transition: transform 1s ease;
+}
+
+.logo.loading {
+    filter: drop-shadow(0 0 2em #02ffc0aa);
+    animation: rotateCounterClockwise 2s linear infinite;
+}
+
+@keyframes rotateCounterClockwise {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}

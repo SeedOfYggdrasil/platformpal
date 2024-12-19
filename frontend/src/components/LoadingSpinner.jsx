@@ -1,10 +1,11 @@
-import { } from 'react';
-import PropTypes from 'prop-types';
-import '@s/Spinner.css';
+// ../frontend/src/components/LoadingSpinner.jsx
 
-const Spinner = () => {
+import { } from 'react';
+import '@s/LoadingSpinner.css';
+
+const LoadingSpinner = () => {
   return (
-    <div className="container">
+    <div className="spinner">
       <div className="one common"></div>
       <div className="two common"></div>
       <div className="three common"></div>
@@ -13,13 +14,8 @@ const Spinner = () => {
       <div className="six common"></div>
       <div className="seven common"></div>
       <div className="eight common"></div>
-      <div className="bar">
-        <div className="progress"></div>
-      </div>
     </div>
   );
 };
 
-Spinner.propTypes = {};
-
-export default Spinner;
+export default LoadingSpinner;

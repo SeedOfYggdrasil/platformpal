@@ -2,46 +2,68 @@
 
 import { useRef, useState } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+import Progress from './Progress.jsx';
+import '@s/FileUpload.css';
+import '@s/Progress.css';
 
-const FileUpload = ({ apiEndpoint }) => {
-  const [uploadStatus, setUploadStatus] = useState('');
+const FileUpload = ({ apiEndpoint, setLoading }) => {
+  const [status, setStatus] = useState('');
+  const [error, setError] = useState('');
+  const [buttonText, setButtonText] = useState('Upload Files')
   const fileInputRef = useRef(null);
 
   const handleButtonClick = () => {
     if (fileInputRef.current) {
-      fileInputRef.current.click(); // Trigger the file input
+      fileInputRef.current.click();
     }
   };
 
   const handleFileChange = async (e) => {
     const files = e.target.files;
     if (!files.length) {
-      setUploadStatus('No files selected.');
+      setStatus('Upload Files');
       return;
     }
-  
+
     const formData = new FormData();
-    Array.from(files).forEach((file) => formData.append('imgFiles', file)); // Key: imgFiles
-  
+    Array.from(files).forEach((file) => formData.append('imgFiles', file));
+
     try {
-      setUploadStatus('Uploading...');
-      const response = await axios.post(apiEndpoint, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-      setUploadStatus(`Upload Successful: ${response.data.message}`);
+      setLoading(true);
+      setProgress(0);
+      setButtonText('Uploading...')
+
+     const response = await axios.post(apiEndpoint, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      onUploadProgress: (progressEvent) => {
+        const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+
+        socket.emit('processingProgress', { progress });
+      },
+    });
+
+      setStatus(`${response.data.message}`);
     } catch (error) {
-      setUploadStatus(`Upload Failed: ${error.response?.data?.error || error.message}`);
+      setError(`Error: ${error.response?.data?.error || error.message}`);
     }
+    setLoading(false);
   };
 
   return (
+
     <div className="file-upload">
-    
+
+      <Progress loading={isLoading} />
+
+      <div className="status">
+        {status && <p>{status}</p>}
+        {error && <p>{error}</p>}
+      </div>
+
       <button onClick={handleButtonClick} className="uploadButton">
-        Upload Files
+        {buttonText}
       </button>
-      
+
       <input
         type="file"
         multiple
@@ -49,17 +71,14 @@ const FileUpload = ({ apiEndpoint }) => {
         onChange={handleFileChange}
         style={{ display: 'none' }}
       />
-      
-      <div className="uploadOutput">
-    	{uploadStatus && <p>{uploadStatus}</p>}
-	  </div>
-	  
-	</div>
-  );
-};
 
-FileUpload.propTypes = {
-  apiEndpoint: PropTypes.string.isRequired,
+      <div className="error">
+        
+      </div>
+
+    </div>
+
+  );
 };
 
 export default FileUpload;

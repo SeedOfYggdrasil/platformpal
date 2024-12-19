@@ -87,25 +87,29 @@ const io = new Server(server, {
 	},
 });
 
-io.on('connection', (socket) => logger.info('A client connected.'));
-export const emitProgress = (progress) => io.emit('progress', progress);
+// Websocket
+io.on('connection', (socket) => {
+  logger.info('Client connected.');
 
+  // Simulated 'Progress' Output
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress = Math.min(progress + (Math.random() * 15 + 5), 100);
 
+    socket.emit('processingProgress', { progress: Math.floor(progress) });
+    console.log('Emitting progress:', progress);
 
-// Alternate Server Config
+    if (progress >= 100) {
+      socket.emit('processingComplete');
+      clearInterval(interval);
+    }
+  }, 1000);
 
-//import { createServer } from 'http';
-//const httpServer = createServer(app);
-//const io = new Server(httpServer, {
-//   cors: {
-//     origin: corsOrigins,
-//   },
-//});
-//httpServer.listen(port, () => {
-//  logger.info(`Server is listening on port ${port}`);
-//});
-
-
+  socket.on('disconnect', () => {
+    logger.info('A client disconnected.');
+    clearInterval(interval);
+  });
+});
 
 // Graceful Shutdown
 const gracefulShutdown = () => {
