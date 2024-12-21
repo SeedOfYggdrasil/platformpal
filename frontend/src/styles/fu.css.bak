@@ -1,0 +1,46 @@
+/* ../frontend/src/styles/FileUpload.css */
+
+.file-upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+.uploadButton {
+  	display: flex;
+    min-width: 100px;
+    max-width: 150px;
+    height: 50;
+    padding: 2rem;
+    background-color: rgba(25, 150, 200, 1);
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+uploadButton:hover {
+    background-color: rgba(41, 210, 252, 0.74);
+}
+.uploadButton:active  {
+    background-color: rgb(160, 252, 255);
+}
+  
+.status {
+    display: flex;
+    width: 100%;
+    height: auto;
+    padding: 1em;
+    margin: 1em;
+}
+.status p {
+    font-size: 1rem;
+}
+.status p.error {
+     color: red;
+}

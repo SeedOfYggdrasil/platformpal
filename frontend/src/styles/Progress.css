@@ -1,12 +1,15 @@
 /* ../frontend/src/styles/Progress.css */
 
 .progress {
+  display: flex;
+  width: 100%;
+  justify-items: center;
   text-align: center;
-  margin: 2rem;
-  padding: 2rem;
+  margin: 1rem ;
+  padding: 1rem;
 }
 
-.progress p {
+.progress-text {
   font-size: 3em;
   color: #ffffff;
 }

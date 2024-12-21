@@ -1,84 +1,67 @@
-// ../frontend/src/components/FileUpload.jsx
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+import './style.css';
 
-import { useRef, useState } from 'react';
-import axios from 'axios';
-import Progress from './Progress.jsx';
-import '@s/FileUpload.css';
-import '@s/Progress.css';
+const FileUpload = () => {
+  const [preview, setPreview] = useState('');
+  const [messages, setMessages] = useState('');
+  const [notImage, setNotImage] = useState(false);
+  const [progress, setProgress] = useState(0);
 
-const FileUpload = ({ apiEndpoint, setLoading }) => {
-  const [status, setStatus] = useState('');
-  const [error, setError] = useState('');
-  const [buttonText, setButtonText] = useState('Upload Files')
-  const fileInputRef = useRef(null);
-
-  const handleButtonClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (event) => setPreview(event.target.result);
+      reader.readAsDataURL(file);
+      setNotImage(false);
+      setMessages(`File "${file.name}" selected.`);
+    } else {
+      setPreview('');
+      setNotImage(true);
+      setMessages('Please select a valid image file.');
     }
-  };
-
-  const handleFileChange = async (e) => {
-    const files = e.target.files;
-    if (!files.length) {
-      setStatus('Upload Files');
-      return;
-    }
-
-    const formData = new FormData();
-    Array.from(files).forEach((file) => formData.append('imgFiles', file));
-
-    try {
-      setLoading(true);
-      setProgress(0);
-      setButtonText('Uploading...')
-
-     const response = await axios.post(apiEndpoint, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-      onUploadProgress: (progressEvent) => {
-        const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-
-        socket.emit('processingProgress', { progress });
-      },
-    });
-
-      setStatus(`${response.data.message}`);
-    } catch (error) {
-      setError(`Error: ${error.response?.data?.error || error.message}`);
-    }
-    setLoading(false);
   };
 
   return (
+    <div>
+      <h2>PlatformPal</h2>
+      <p className="lead"Show the world what you got.<b>Everywhere you got it.</b></p>
 
-    <div className="file-upload">
+      <form id="file-upload-form" className="uploader">
+        <input
+          id="file-upload"
+          type="file"
+          name="fileUpload"
+          accept="image/*"
+          onChange={handleFileChange}
+        />
 
-      <Progress loading={isLoading} />
-
-      <div className="status">
-        {status && <p>{status}</p>}
-        {error && <p>{error}</p>}
-      </div>
-
-      <button onClick={handleButtonClick} className="uploadButton">
-        {buttonText}
-      </button>
-
-      <input
-        type="file"
-        multiple
-        ref={fileInputRef}
-        onChange={handleFileChange}
-        style={{ display: 'none' }}
-      />
-
-      <div className="error">
-        
-      </div>
-
+        <label htmlFor="file-upload" id="file-drag">
+          {preview ? (
+            <img id="file-image" src={preview} alt="Preview" />
+          ) : (
+            <div id="start">
+              <i className="fa fa-download" aria-hidden="true"></i>
+              <div>Select a file or drag here</div>
+              {notImage && <div id="notimage">Please select an image</div>}
+              <span id="file-upload-btn" className="btn btn-primary">
+                Select File(s) to Upload (max: 10)
+              </span>
+            </div>
+          )}
+          <div id="response" className={preview ? '' : 'hidden'}>
+            <div id="messages">{messages}</div>
+            <progress className="progress" id="file-progress" value={progress}>
+              <span>{progress}</span>%
+            </progress>
+          </div>
+        </label>
+      </form>
     </div>
-
   );
 };
+
+FileUpload.propTypes = {};
 
 export default FileUpload;
