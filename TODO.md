@@ -12,6 +12,10 @@ Build and deploy a functional web-application prototype that satisfies eachl of 
 	- expresses the backend processing visually as part of the UI, using aesthetically appealing styles, fonts, media, animations
 	
 ### Recent
+
+- Current:
+	Modifying /home/dev/.userenv/.user ; invalid identifier error	
+
 1. User can select up to 10 image files to upload
 2. The selected files are successfully uploaded to the backend server
 3. Logo animates during processing

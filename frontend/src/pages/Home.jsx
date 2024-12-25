@@ -1,16 +1,18 @@
-''// frontend/src/pages/Home.jsx
+// frontend/src/pages/Home.jsx
 
 import { useState } from 'react';
-import logo from '../assets/logo.svg';
+import { useNavigate } from 'react-router-dom';
 import FileUpload from '@c/FileUpload.jsx';
 import Progress from '@c/Progress.jsx';
+import logo from '../assets/logo.svg';
+
 import '@s/Home.css';
 import '@s/logo.css';
 
 function Home() {
   const [isLoading, setLoading] = useState(false);
 
-  return (
+    return (
     <div className="cs-container">
         <div className="cs-content">
           <div className="logo">

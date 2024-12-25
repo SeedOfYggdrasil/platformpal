@@ -9,6 +9,7 @@
     "axios": "^1.7.9",
     "react": "latest",
     "react-dom": "latest",
+    "react-router-dom": "^7.1.1",
     "rebass": "^4.0.7",
     "socket.io-client": "^4.8.1"
   },

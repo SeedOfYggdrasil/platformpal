@@ -1,12 +1,15 @@
 // ../frontend/src/main.jsx
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import Home from '@p/Home.jsx';
-import '@s/Fonts.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router } from "react-router-dom";
+import Home from '@p/Home';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Home />
-  </React.StrictMode>
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+	<React.StrictMode>
+		<Router>
+			<Home />
+		</Router>
+	</React.StrictMode>
 );
